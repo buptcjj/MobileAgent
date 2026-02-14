@@ -611,11 +611,16 @@ def build_messages(image_path, instruction, history_output, model_name, history_
             previous_actions.append(f"Step {i + 1}: {text}")
 
     previous_actions_str = "\n".join(previous_actions) if previous_actions else "None"
-
+    from datetime import datetime
+    today = datetime.today()
+    weekday_names = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"]
+    weekday = weekday_names[today.weekday()]
+    formatted_date = today.strftime("%Y年%m月%d日") + " " + weekday
+    date_info = f'''今天的日期是:{formatted_date}。'''
     instruction_prompt = (
         "Please generate the next move according to the UI screenshot, "
         "instruction and previous actions.\n\n"
-        f"Instruction: {instruction}\n\n"
+        f"Instruction: {date_info}{instruction}\n\n"
         f"Previous actions:\n{previous_actions_str}"
     )
 
