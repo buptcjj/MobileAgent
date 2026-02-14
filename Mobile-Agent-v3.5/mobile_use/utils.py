@@ -367,13 +367,12 @@ def build_messages(image_path, instruction, history_output, model_name, history_
     previous_actions_str = "\n".join(previous_actions) if previous_actions else "None"
 
     # Build date context
+    from datetime import datetime
     today = datetime.today()
-    weekday_names = [
-        "Monday", "Tuesday", "Wednesday", "Thursday",
-        "Friday", "Saturday", "Sunday",
-    ]
-    formatted_date = today.strftime("%Y-%m-%d") + " " + weekday_names[today.weekday()]
-    date_info = f"Today's date is: {formatted_date}."
+    weekday_names = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"]
+    weekday = weekday_names[today.weekday()]
+    formatted_date = today.strftime("%Y年%m月%d日") + " " + weekday
+    date_info = f'''今天的日期是:{formatted_date}。'''
 
     instruction_prompt = (
         f"Please generate the next move according to the UI screenshot, "
